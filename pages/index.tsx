@@ -2,13 +2,13 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
-import { list } from "postcss";
 import Link from "next/link";
 import Date from "../components/date";
+import { GetStaticProps } from "next";
 
 export default function Home({ allPostsData }) {
   return (
-    <Layout home>
+    <Layout home={true}>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -17,6 +17,7 @@ export default function Home({ allPostsData }) {
           Hello, I'm a software engineer and IT consultant while working at
           Jinair as Revenue Accounting team manager.
         </p>
+        <p>This is a typescript version.</p>
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -37,11 +38,11 @@ export default function Home({ allPostsData }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
